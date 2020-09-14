@@ -18,6 +18,7 @@ _str_to_activation = {
 }
 
 
+
 def build_mlp(
         input_size: int,
         output_size: int,
@@ -65,7 +66,7 @@ device = None
 
 def init_gpu(use_gpu=True, gpu_id=0):
     global device
-    if torch.cuda.is_available() and use_gpu:
+    if torch.cuda.is_available() and use_gpu and False:
         device = torch.device("cuda:" + str(gpu_id))
         print("Using GPU id {}".format(gpu_id))
     else:

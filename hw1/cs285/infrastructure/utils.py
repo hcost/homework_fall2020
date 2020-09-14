@@ -36,6 +36,7 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
         acs.append(ac)
 
         # take that action and record results
+
         ob, rew, done, _ = env.step(ac)
 
         # record result of taking that action
