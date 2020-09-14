@@ -27,7 +27,12 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
 
         # use the most recent ob to decide what to do
         obs.append(ob)
+<<<<<<< HEAD
         ac = policy.get_action(ob) # HINT: query the policy's get_action function
+=======
+        ac = policy.get_action(ob)
+        ac = ac[0]
+>>>>>>> rev 1
         acs.append(ac)
 
         # take that action and record results
@@ -38,9 +43,13 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
         next_obs.append(ob)
         rewards.append(rew)
 
-        # TODO end the rollout if the rollout ended
+        # ODO end the rollout if the rollout ended
         # HINT: rollout can end due to done, or due to max_path_length
+<<<<<<< HEAD
         rollout_done = (done or (steps >= max_path_length))# HINT: this is either 0 or 1
+=======
+        rollout_done = (done or (steps == max_path_length-1))
+>>>>>>> rev 1
         terminals.append(rollout_done)
 
         if rollout_done:
@@ -52,7 +61,7 @@ def sample_trajectories(env, policy, min_timesteps_per_batch, max_path_length, r
     """
         Collect rollouts until we have collected min_timesteps_per_batch steps.
 
-        TODO implement this function
+        ODO implement this function
         Hint1: use sample_trajectory to get each path (i.e. rollout) that goes into paths
         Hint2: use get_pathlength to count the timesteps collected in each path
     """
@@ -62,13 +71,17 @@ def sample_trajectories(env, policy, min_timesteps_per_batch, max_path_length, r
         paths.append(sample_trajectory(env, policy, max_path_length, render, render_mode))
         timesteps_this_batch += get_pathlength(paths[0])
 
+<<<<<<< HEAD
     return paths, timesteps_this_batch
+=======
+    return convert_listofrollouts(paths), timesteps_this_batch
+>>>>>>> rev 1
 
 def sample_n_trajectories(env, policy, ntraj, max_path_length, render=False, render_mode=('rgb_array')):
     """
         Collect ntraj rollouts.
 
-        TODO implement this function
+        ODO implement this function
         Hint1: use sample_trajectory to get each path (i.e. rollout) that goes into paths
     """
     paths = []
@@ -76,7 +89,7 @@ def sample_n_trajectories(env, policy, ntraj, max_path_length, render=False, ren
     for _ in range(ntraj):
         paths.append(sample_trajectory(env, policy, max_path_length, render, render_mode))
 
-    return paths
+    return convert_listofrollouts(paths)
 
 ############################################
 ############################################
