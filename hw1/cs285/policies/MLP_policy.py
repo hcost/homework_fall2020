@@ -96,6 +96,7 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
             action = self(observation)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         return action
 >>>>>>> rev 1
 =======
@@ -104,6 +105,9 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 =======
         return action
 >>>>>>> rev 1
+=======
+        return action.sample()
+>>>>>>> fuck
 
     # update/train this policy
     def update(self, observations, actions, **kwargs):
@@ -133,8 +137,14 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 >>>>>>> fuck
 =======
         net = self.mean_net if not self.discrete else self.logits_na
+<<<<<<< HEAD
         return net(observation)
 >>>>>>> rev 1
+=======
+        dist = torch.distributions.Normal(net(torch.Tensor(observation)), self.logstd)
+        dist.requires_grad = True
+        return dist
+>>>>>>> fuck
 
 
 #####################################################
@@ -153,6 +163,7 @@ class MLPPolicySL(MLPPolicy):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         self.optimizer.zero_grad()
         sampled = self(observations)
         actions = ptu.from_numpy(actions)
@@ -162,6 +173,8 @@ class MLPPolicySL(MLPPolicy):
 =======
 >>>>>>> rev 1
 =======
+=======
+>>>>>>> fuck
         self.optimizer.zero_grad()
         actions = ptu.from_numpy(actions)
         sampled = self(observations).sample()
@@ -170,9 +183,12 @@ class MLPPolicySL(MLPPolicy):
         loss.backward()
         self.optimizer.step()
 
+<<<<<<< HEAD
 >>>>>>> fuck
 =======
 >>>>>>> rev 1
+=======
+>>>>>>> fuck
 
         return {
             # You can add extra logging information here, but keep this line
