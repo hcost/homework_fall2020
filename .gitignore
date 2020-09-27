@@ -1,2 +1,6 @@
 *.pyc
 data/
+hw1/.idea/
+hw1/README.txt
+hw1/cs285.egg-info/
+hw1/hwresults
