@@ -87,7 +87,11 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         return ptu.to_numpy(action)
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> rev 1
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         # ODO return the action that the policy prescribes
         if self.discrete:
             output = self(observation)
@@ -97,17 +101,25 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         return action
 >>>>>>> rev 1
 =======
         return action.sample()
 >>>>>>> fuck
 =======
+<<<<<<< HEAD
         return action
 >>>>>>> rev 1
 =======
         return action.sample()
 >>>>>>> fuck
+=======
+        return action.sample()
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
 
     # update/train this policy
     def update(self, observations, actions, **kwargs):
@@ -138,6 +150,7 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 =======
         net = self.mean_net if not self.discrete else self.logits_na
 <<<<<<< HEAD
+<<<<<<< HEAD
         return net(observation)
 >>>>>>> rev 1
 =======
@@ -145,6 +158,12 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         dist.requires_grad = True
         return dist
 >>>>>>> fuck
+=======
+        dist = torch.distributions.Normal(net(torch.Tensor(observation)), self.logstd)
+        dist.requires_grad = True
+        return dist
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
 
 
 #####################################################
@@ -164,6 +183,9 @@ class MLPPolicySL(MLPPolicy):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         self.optimizer.zero_grad()
         sampled = self(observations)
         actions = ptu.from_numpy(actions)
@@ -174,7 +196,11 @@ class MLPPolicySL(MLPPolicy):
 >>>>>>> rev 1
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> fuck
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         self.optimizer.zero_grad()
         actions = ptu.from_numpy(actions)
         sampled = self(observations).sample()
@@ -186,9 +212,13 @@ class MLPPolicySL(MLPPolicy):
 <<<<<<< HEAD
 >>>>>>> fuck
 =======
+<<<<<<< HEAD
 >>>>>>> rev 1
 =======
 >>>>>>> fuck
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
 
         return {
             # You can add extra logging information here, but keep this line

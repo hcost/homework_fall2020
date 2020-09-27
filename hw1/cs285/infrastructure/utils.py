@@ -32,7 +32,11 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
         ac = policy.get_action(ob) # HINT: query the policy's get_action function
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> rev 1
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         ac = policy.get_action(ob)
         ac = ac[0]
 >>>>>>> rev 1
@@ -57,7 +61,11 @@ def sample_trajectory(env, policy, max_path_length, render=False, render_mode=('
 >>>>>>> rev 1
 =======
         rollout_done = (done or (steps == max_path_length-1))
+<<<<<<< HEAD
 >>>>>>> rev 1
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         terminals.append(rollout_done)
 
         if rollout_done:
@@ -87,7 +95,11 @@ def sample_trajectories(env, policy, min_timesteps_per_batch, max_path_length, r
 >>>>>>> rev 1
 =======
     return convert_listofrollouts(paths), timesteps_this_batch
+<<<<<<< HEAD
 >>>>>>> rev 1
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
 
 def sample_n_trajectories(env, policy, ntraj, max_path_length, render=False, render_mode=('rgb_array')):
     """

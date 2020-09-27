@@ -210,7 +210,11 @@ class RL_Trainer(object):
 >>>>>>> rev 1
 =======
         # ODO relabel collected obsevations (from our policy) with labels from an expert policy
+<<<<<<< HEAD
 >>>>>>> rev 1
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         # HINT: query the policy (using the get_action function) with paths[i]["observation"]
         # and replace paths[i]["action"] with these expert labels
         for i in range(len(paths)):
@@ -219,7 +223,11 @@ class RL_Trainer(object):
 <<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> rev 1
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
 
 >>>>>>> rev 1
         return paths

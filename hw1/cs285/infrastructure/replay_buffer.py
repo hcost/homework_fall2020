@@ -85,7 +85,11 @@ class ReplayBuffer(object):
 =======
 >>>>>>> rev 1
 =======
+<<<<<<< HEAD
 >>>>>>> rev 1
+=======
+>>>>>>> 71c761843058117b418f69c07d302874734ece60
+>>>>>>> 29e4f2aa00c4db48daf78e04b61430483c0542a9
         return self.obs[indices], self.acs[indices], self.rews[indices], self.next_obs[indices], self.terminals[indices]
 
     def sample_recent_data(self, batch_size=1):
