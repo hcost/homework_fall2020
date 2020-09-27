@@ -81,10 +81,13 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
             observation = obs[None]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         # TODO return the action that the policy prescribes
         action = self(obs)
         return ptu.to_numpy(action)
 =======
+=======
+>>>>>>> rev 1
         # ODO return the action that the policy prescribes
         if self.discrete:
             output = self(observation)
@@ -92,11 +95,15 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         else:
             action = self(observation)
 <<<<<<< HEAD
+<<<<<<< HEAD
         return action
 >>>>>>> rev 1
 =======
         return action.sample()
 >>>>>>> fuck
+=======
+        return action
+>>>>>>> rev 1
 
     # update/train this policy
     def update(self, observations, actions, **kwargs):
@@ -109,6 +116,7 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
     # `torch.distributions.Distribution` object. It's up to you!
     #TODO
     def forward(self, observation: torch.FloatTensor) -> Any:
+<<<<<<< HEAD
 <<<<<<< HEAD
         mean = self.mean_net(ptu.from_numpy(observation))
         dist = torch.distributions.Normal(mean, torch.exp(self.logstd))
@@ -123,6 +131,10 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         dist.requires_grad = True
         return dist
 >>>>>>> fuck
+=======
+        net = self.mean_net if not self.discrete else self.logits_na
+        return net(observation)
+>>>>>>> rev 1
 
 
 #####################################################
@@ -138,6 +150,7 @@ class MLPPolicySL(MLPPolicy):
             adv_n=None, acs_labels_na=None, qvals=None
     ):
         # TODO: update the policy and return the loss
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         self.optimizer.zero_grad()
@@ -158,6 +171,8 @@ class MLPPolicySL(MLPPolicy):
         self.optimizer.step()
 
 >>>>>>> fuck
+=======
+>>>>>>> rev 1
 
         return {
             # You can add extra logging information here, but keep this line

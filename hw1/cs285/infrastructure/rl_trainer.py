@@ -203,7 +203,11 @@ class RL_Trainer(object):
         print("\nRelabelling collected observations with labels from an expert policy...")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         # TODO relabel collected observations (from our policy) with labels from an expert policy
+=======
+        # ODO relabel collected obsevations (from our policy) with labels from an expert policy
+>>>>>>> rev 1
 =======
         # ODO relabel collected obsevations (from our policy) with labels from an expert policy
 >>>>>>> rev 1
@@ -212,7 +216,10 @@ class RL_Trainer(object):
         for i in range(len(paths)):
             paths[i]['action'] = expert_policy.get_action(paths[i]['observation'])
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> rev 1
 
 >>>>>>> rev 1
         return paths

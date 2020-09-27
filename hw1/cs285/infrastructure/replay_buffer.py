@@ -79,8 +79,11 @@ class ReplayBuffer(object):
         indices = np.random.permutation(self.obs.shape[0])[:batch_size]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         indices = np.random.permutation(self.obs.shape[0])[:batch_size]
 
+=======
+>>>>>>> rev 1
 =======
 >>>>>>> rev 1
         return self.obs[indices], self.acs[indices], self.rews[indices], self.next_obs[indices], self.terminals[indices]
