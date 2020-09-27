@@ -86,8 +86,8 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 
     # query the policy with observation(s) to get selected action(s)
     def get_action(self, obs: np.ndarray) -> np.ndarray:
-        # TODO: get this from hw1
-        return action
+        action = self(obs)
+        return ptu.to_numpy(action)
 
     # update/train this policy
     def update(self, observations, actions, **kwargs):
@@ -99,8 +99,10 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
     # return more flexible objects, such as a
     # `torch.distributions.Distribution` object. It's up to you!
     def forward(self, observation: torch.FloatTensor):
-        # TODO: get this from hw1
-        return action_distribution
+        mean = self.mean_net(ptu.from_numpy(observation))
+        dist = torch.distributions.Normal(mean, torch.exp(self.logstd))
+        return dist.rsample()
+
 
 
 #####################################################
@@ -125,11 +127,23 @@ class MLPPolicyPG(MLPPolicy):
             # by the `forward` method
         # HINT3: don't forget that `optimizer.step()` MINIMIZES a loss
 
-        loss = TODO
+        N = observations.shape[0]
+        T = observations.shape[1]
+        self.optimizer.zero_grad()
+        loss = 0
+
+        for i in range(1, N):
+            for t in range(T):
+                log_prob = actions[i][t].log_prob(observations[i][t])
+                adv = advantages[i][t]
+                loss += adv * log_prob
+
+        loss = - loss
 
         # TODO: optimize `loss` using `self.optimizer`
         # HINT: remember to `zero_grad` first
-        TODO
+        loss.backward()
+        self.optimizer.step()
 
         if self.nn_baseline:
             ## TODO: normalize the q_values to have a mean of zero and a standard deviation of one
