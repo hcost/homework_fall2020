@@ -147,7 +147,7 @@ class MLPPolicyPG(MLPPolicy):
             adv = advantages[i]
             loss += adv * log_prob
 
-        loss = - loss
+        loss = - loss / N
 
         # TODO: optimize `loss` using `self.optimizer`
         # HINT: remember to `zero_grad` first
@@ -171,8 +171,7 @@ class MLPPolicyPG(MLPPolicy):
             
             # TODO: compute the loss that should be optimized for training the baseline MLP (`self.baseline`)
             # HINT: use `F.mse_loss`
-            q_values = ptu.from_numpy(q_values)
-            baseline_loss = F.mse_loss(baseline_predictions, q_values)
+            baseline_loss = F.mse_loss(baseline_predictions, targets)
 
             # TODO: optimize `baseline_loss` using `self.baseline_optimizer`
             # HINT: remember to `zero_grad` first
