@@ -15,6 +15,7 @@ class CQLCritic(BaseCritic):
         self.env_name = hparams['env_name']
         self.ob_dim = hparams['ob_dim']
 
+
         if isinstance(self.ob_dim, int):
             self.input_shape = (self.ob_dim,)
         else:
@@ -86,7 +87,13 @@ class CQLCritic(BaseCritic):
         # CQL Implementation
         # TODO: Implement CQL as described in the pdf and paper
         # Hint: After calculating cql_loss, augment the loss appropriately
-        cql_loss = None
+        exp_sum = torch.exp(qa_t_values[:, 0])
+        for i in range(1, self.ac_dim):
+            exp_sum = torch.exp(qa_t_values[:, i]) + exp_sum
+        q_t_logsumexp = torch.log(exp_sum)
+        cql_loss = (q_t_logsumexp - q_t_values).mean()
+        loss = self.cql_alpha * cql_loss + loss
+
 
         self.optimizer.zero_grad()
         loss.backward()
@@ -95,9 +102,9 @@ class CQLCritic(BaseCritic):
         info = {'Training Loss': ptu.to_numpy(loss)}
 
         # TODO: Uncomment these lines after implementing CQL
-        # info['CQL Loss'] = ptu.to_numpy(cql_loss)
-        # info['Data q-values'] = ptu.to_numpy(q_t_values).mean()
-        # info['OOD q-values'] = ptu.to_numpy(q_t_logsumexp).mean()
+        info['CQL Loss'] = ptu.to_numpy(cql_loss)
+        info['Data q-values'] = ptu.to_numpy(q_t_values).mean()
+        info['OOD q-values'] = ptu.to_numpy(q_t_logsumexp).mean()
 
         return info
 
@@ -112,3 +119,7 @@ class CQLCritic(BaseCritic):
         obs = ptu.from_numpy(obs)
         qa_values = self.q_net(obs)
         return ptu.to_numpy(qa_values)
+
+'''
+python cs285/scripts/run_hw5_expl.py --env_name PointmassMedium-v0 --use_rnd --unsupervised_exploration --offline_exploitation --cql_alpha=.35 --exp_name q2_alpha_.35
+'''

@@ -54,6 +54,7 @@ def main():
     parser.add_argument('--use_rnd', action='store_true')
     parser.add_argument('--num_exploration_steps', type=int, default=10000)
     parser.add_argument('--unsupervised_exploration', action='store_true')
+    parser.add_argument('--use_count', action='store_true')
 
     parser.add_argument('--offline_exploitation', action='store_true')
     parser.add_argument('--cql_alpha', type=float, default=0.0)
